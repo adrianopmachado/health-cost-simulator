@@ -30,13 +30,6 @@ O trabalho passou por três etapas:
 - **Tabagismo é o fator que mais pesa.** Sozinho, já é o maior direcionador de custo. Combinado com obesidade, o custo mediano chega a quadruplicar em relação a um perfil não fumante e com peso normal.
 - **Região, gênero e número de dependentes** têm correlação baixa com os picos de custo — não são bons preditores isoladamente.
 
-## Stack utilizada
-
-- **Python:** Pandas, Scikit-Learn e Joblib para construir e salvar o modelo preditivo.
-- **Streamlit:** interface web e deploy em nuvem (Streamlit Community Cloud).
-- **Power BI + DAX:** camada de visualização e cálculo de KPIs.
-- **UI:** tema escuro personalizado (paleta teal & beige).
-
 ## Modelo Preditivo
 
 Foi utilizada uma **Regressão Linear**, treinada com 80% da base e validada nos 20% restantes.
@@ -63,18 +56,12 @@ O simulador permite que gestores de RH estimem o impacto financeiro mensal de um
 
 👉 [simulador-custos-medicos.streamlit.app](https://simulador-custos-medicos.streamlit.app)
 
-**Estrutura do repositório:**
-```
-Power BI/           → relatório executivo (.pbix)
-dados/              → bases usadas nas análises
-models/             → modelo treinado (modelo_predicao_custos.pkl)
-notebooks/          → análise exploratória e treinamento do modelo
-app.py              → código principal da aplicação web
-requirements.txt    → bibliotecas utilizadas na aplicação
-```
+![Demonstração da aplicação](images/aplicacao.gif)
 
 ## Dashboard (Power BI)
-![dashboard](images/Dashboard.png)
+![Dashboard](images/Dashboard.png)
+
+![Navegação pelo dashboard](images/dashboard-powerbi.gif)
 
 O painel foi organizado em quatro blocos:
 
@@ -82,3 +69,51 @@ O painel foi organizado em quatro blocos:
 2. **KPIs principais** — volume de vidas, custo mediano, % fumantes, % obesidade.
 3. **Análise causal** — gráficos mostrando o impacto do tabagismo e a progressão de custo por faixa de IMC.
 4. **Mapa de risco combinado** — heatmap cruzando tabagismo x IMC, destacando os grupos de maior custo.
+
+## Estrutura do Repositório
+
+```
+Power BI/           → relatório executivo (.pbix)
+dados/              → bases usadas nas análises
+models/             → modelo treinado (modelo_predicao_custos.pkl)
+notebooks/          → análise exploratória e treinamento do modelo
+images/             → imagens usadas no README
+app.py              → código principal da aplicação web
+requirements.txt    → bibliotecas utilizadas na aplicação
+```
+
+## Como executar localmente
+
+```bash
+# Clone o repositório
+git clone https://github.com/adrianopmachado/health-cost-simulator.git
+cd health-cost-simulator
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Rode a aplicação
+streamlit run app.py
+```
+
+A aplicação abrirá automaticamente no navegador em `http://localhost:8501`.
+
+## Stack utilizada
+
+- **Python:** Pandas, Scikit-Learn e Joblib para construir e salvar o modelo preditivo.
+- **Streamlit:** interface web e deploy em nuvem (Streamlit Community Cloud).
+- **Power BI + DAX:** camada de visualização e cálculo de KPIs.
+- **UI:** tema escuro personalizado (paleta teal & beige).
+
+## Limitações
+
+- O modelo foi treinado em uma base pequena (1.337 registros) e sintética, disponibilizada para fins educacionais — não deve ser usado para decisões financeiras reais de RH.
+- Foi testado apenas um algoritmo (Regressão Linear). Modelos não-lineares podem capturar melhor interações entre variáveis.
+- As previsões refletem os padrões da base de treino; podem não generalizar bem para perfis fora da faixa observada nos dados (ex: IMC muito extremo, idades muito altas).
+
+## Próximos passos
+
+- Comparar a Regressão Linear com outros algoritmos (Random Forest, Gradient Boosting) para avaliar ganhos de performance.
+- Adicionar validação cruzada para tornar as métricas do modelo mais robustas.
+- Incluir testes automatizados básicos para o pipeline de dados e o app.
+- Ampliar a base de dados com mais variáveis (ex: histórico de sinistros, comorbidades) caso disponível.
