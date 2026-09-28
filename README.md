@@ -61,7 +61,6 @@ O simulador permite que gestores de RH estimem o impacto financeiro mensal de um
 ## Dashboard (Power BI)
 ![Dashboard](images/Dashboard.png)
 
-![Navegação pelo dashboard](images/dashboard-powerbi.gif)
 
 O painel foi organizado em quatro blocos:
 
@@ -107,13 +106,12 @@ A aplicação abrirá automaticamente no navegador em `http://localhost:8501`.
 
 ## Limitações
 
-- O modelo foi treinado em uma base pequena (1.337 registros) e sintética, disponibilizada para fins educacionais — não deve ser usado para decisões financeiras reais de RH.
+- O modelo foi treinado em uma base pequena (1.337 registros), disponibilizada para fins educacionais, cuja origem e forma de coleta não foram detalhadas — por isso, não deve ser usado para decisões financeiras reais de RH.
 - Foi testado apenas um algoritmo (Regressão Linear). Modelos não-lineares podem capturar melhor interações entre variáveis.
 - As previsões refletem os padrões da base de treino; podem não generalizar bem para perfis fora da faixa observada nos dados (ex: IMC muito extremo, idades muito altas).
 
 ## Próximos passos
 
+- Aplicar validação cruzada para confirmar que as métricas do modelo são estáveis, e não dependem de uma única divisão entre treino e teste.
+- Testar variáveis de interação (por exemplo, fumante x obesidade), já que a análise mostrou que a combinação dos dois fatores pesa mais do que a soma dos efeitos isolados.
 - Comparar a Regressão Linear com outros algoritmos (Random Forest, Gradient Boosting) para avaliar ganhos de performance.
-- Adicionar validação cruzada para tornar as métricas do modelo mais robustas.
-- Incluir testes automatizados básicos para o pipeline de dados e o app.
-- Ampliar a base de dados com mais variáveis (ex: histórico de sinistros, comorbidades) caso disponível.
